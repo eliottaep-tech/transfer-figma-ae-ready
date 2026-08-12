@@ -1,0 +1,13 @@
+{
+  "name": "Transfer to After Effects",
+  "id": "transfer-ae-bridge",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "capabilities": [],
+  "networkAccess": {
+    "allowedDomains": ["http://127.0.0.1:7841"],
+    "reasoning": "Sends layer data to the local Transfer desktop app."
+  }
+}

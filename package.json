@@ -1,0 +1,42 @@
+{
+  "name": "transfer-figma-ae",
+  "version": "1.0.0",
+  "description": "Transfer bridge for sending Figma layers to After Effects",
+  "main": "main.js",
+  "author": "Transfer",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis",
+    "pack": "electron-builder --win --dir"
+  },
+  "devDependencies": {
+    "electron": "^37.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.transfer.figmaae",
+    "productName": "Transfer",
+    "files": [
+      "main.js",
+      "renderer/**/*",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "transfer.layer-exchange",
+  "version": "1.0.0",
+  "source": { "app": "Figma", "file": "Marketing Site", "page": "Hero" },
+  "composition": { "create": true, "name": "Hero Card", "width": 1440, "height": 900, "frameRate": 30, "duration": 10 },
+  "layers": [
+    {
+      "id": "12:44",
+      "name": "Card / Surface",
+      "type": "FRAME",
+      "visible": true,
+      "transform": { "x": 220, "y": 180, "width": 640, "height": 360, "rotation": 0 },
+      "opacity": 1,
+      "blendMode": "NORMAL",
+      "corners": { "topLeft": 28, "topRight": 28, "bottomRight": 28, "bottomLeft": 28 },
+      "fills": [{ "type": "SOLID", "color": { "r": 24, "g": 26, "b": 33, "a": 1 }, "opacity": 1 }],
+      "strokes": { "weight": 1, "align": "INSIDE", "color": { "r": 60, "g": 66, "b": 82, "a": 1 } },
+      "effects": [
+        { "type": "DROP_SHADOW", "color": { "r": 0, "g": 0, "b": 0, "a": 0.45 },
+          "offset": { "x": 0, "y": 24 }, "radius": 48, "spread": 0, "blendMode": "NORMAL" }
+      ],
+      "children": []
+    }
+  ]
+}

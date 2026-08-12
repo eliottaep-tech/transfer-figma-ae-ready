@@ -1,0 +1,46 @@
+<!-- ui.html - the slim command bar shown at the top of Figma -->
+<style>
+  body { margin: 0; font: 12px/1.4 Inter, sans-serif; color: #e6e8ef; background: #14161c; }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+  .mark { width: 22px; height: 22px; border-radius: 6px; background: #2f6df6; display: grid; place-items: center; font-weight: 700; }
+  button { border: 0; border-radius: 6px; padding: 7px 11px; background: #262a33; color: #e6e8ef; cursor: pointer; }
+  button.primary { background: #2f6df6; }
+  label { display: flex; align-items: center; gap: 5px; color: #9aa1b1; }
+</style>
+<div class="bar">
+  <div class="mark">T</div>
+  <button class="primary" id="send">Send to AE</button>
+  <label><input type="checkbox" id="separate" checked /> Separate layers</label>
+  <label><input type="checkbox" id="raster" /> Rasterize</label>
+  <label><input type="checkbox" id="comp" checked /> New comp</label>
+</div>
+<script>
+  const BRIDGE = 'http://127.0.0.1:7841/ingest';
+
+  document.getElementById('send').onclick = function () {
+    parent.postMessage({ pluginMessage: { type: 'export', options: {
+      separateLayers: document.getElementById('separate').checked,
+      rasterize: document.getElementById('raster').checked,
+      newComp: document.getElementById('comp').checked
+    } } }, '*');
+  };
+
+  onmessage = async function (event) {
+    const msg = event.data.pluginMessage;
+    if (!msg || msg.type !== 'payload') return;
+    try {
+      await fetch(BRIDGE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(msg.doc)
+      });
+    } catch (e) {
+      // Desktop app not running: fall back to a manual .tlx download.
+      const blob = new Blob([JSON.stringify(msg.doc, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = msg.doc.composition.name + '.tlx';
+      a.click();
+    }
+  };
+</script>
